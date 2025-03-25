@@ -15,7 +15,7 @@ plt.axis('equal')
 plt.grid(True)
 
 
-t_0 = 8 * np.pi / 3.5
+t_0 = 8 * np.pi / 4
 x_0 = x_fun(t_0)
 y_0 = y_fun(t_0)
 

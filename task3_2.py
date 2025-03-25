@@ -109,4 +109,5 @@ def task_c():
 
     img.show()
 
+# task_a()
 task_c()

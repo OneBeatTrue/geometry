@@ -60,6 +60,7 @@ def draw_bresenham(r):
             d = d + 4 * x + 6
         x += 1
     extend_round(arr)
+    # arr = affine.Ro(np.pi / 3, arr)
     draw(arr)
 
 
