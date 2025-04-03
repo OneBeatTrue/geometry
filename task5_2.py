@@ -12,15 +12,17 @@ class Point(object):
     def __eq__(self, other):
         return self.x == other.x and self.y == other.y
 
-    def draw(self):
-        plt.scatter(self.x, self.y, color='black', zorder=2)
+    def draw(self, color='black'):
+        plt.scatter(self.x, self.y, color=color, zorder=2)
 
     def to_str(self):
         return "(" + str(self.x) + ", " + str(self.y) + ")"
 
     def highlight(self):
-        plt.scatter(self.x, self.y, color='red', zorder=3)
+        plt.scatter(self.x, self.y, color='#66ff00', zorder=3)
 
+    def lowlight(self):
+        plt.scatter(self.x, self.y, color='red', zorder=3)
 
 class Segment(object):
     def __init__(self, p1, p2):
@@ -175,7 +177,7 @@ for point in points_to_check:
     if polygon.is_inside(point):
         point.highlight()
     else:
-        point.draw()
+        point.lowlight()
 
 plt.axis('equal')
 plt.grid(True)

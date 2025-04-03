@@ -13,6 +13,7 @@ class Point(object):
     def to_str(self):
         return "(" + str(self.x) + ", " + str(self.y) + ")"
 
+
 class Segment(object):
     def __init__(self, p1, p2):
         self.p1 = p1
@@ -68,6 +69,7 @@ class Segment(object):
 
         if ps1 <= 0 and ps2 <= 0:
             return self.intersect_1(other)
+
 
 segments = [
     Segment(Point(1,1), Point(2,5)),
