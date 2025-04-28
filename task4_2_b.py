@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 from shapes import Point, Polygon
 
-# points = [
+# cells = [
 #     Point(2, 0),
 #     Point(6, 0),
 #     Point(8, 1),
@@ -18,7 +18,7 @@ from shapes import Point, Polygon
 # Point(1, 5),
 # ]
 
-# points = [
+# cells = [
 #     Point(1, 1),
 #     Point(2, 2),
 #     Point(4, 0),

@@ -1,5 +1,6 @@
 import matplotlib.pyplot as plt
-from shapes import Point, Polygon, Line, Segment
+from shapes import Point, Polygon, Line, Segment, Vector
+from stack import Stack
 
 
 class VoronoiCell(object):
@@ -23,7 +24,7 @@ class VoronoiCell(object):
     def draw(self, polygon_color="black", point_color="red", fill_color="white"):
         self.polygon.draw(polygon_color)
         self.point.draw(point_color)
-        self.polygon.fill(fill_color)
+        # self.polygon.fill(fill_color)
 
 
 class VoronoiDiagram(object):

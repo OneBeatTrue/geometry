@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 import bisect
 from heapq import heappush, heappop
 from shapes import Point, Segment
+import heapq
 
 
 class Event:
@@ -14,51 +15,28 @@ class Event:
     def __lt__(self, other):
         if self.x == other.x:
             return self.is_start > other.is_start
-        return self.x < other.x
+        return self.point < other.point
 
 
 def bentley_ottmann(segments):
     events = []
-    status = []
+    active = []
     intersections = []
-
     for segment in segments:
-        heappush(events, Event(segment, True))
-        heappush(events, Event(segment, False))
+        events.append(Event(segment, True))
+        events.append(Event(segment, False))
 
-    def insert(segment, x):
-        y = segment.intersect_vertical(x)
-        bisect.insort(status, (y, segment))
-
-    def remove(segment, x):
-        y = segment.intersect_vertical(x)
-        index = bisect.bisect_left(status, (y, segment))
-        if index < len(status) and status[index][1] == segment:
-            status.pop(index)
-
-    def check_neighbors(index):
-        if 0 <= index < len(status) - 1:
-            seg1 = status[index][1]
-            seg2 = status[index + 1][1]
-            point = seg1.intersect_b(seg2)
-            if point:
-                intersections.append(point)
-
-    while events:
-        event = heappop(events)
-        x = event.x
-
+    events.sort()
+    for event in events:
         if event.is_start:
-            insert(event.segment, x)
-            index = bisect.bisect_left(status, (event.segment.intersect_vertical(x), event.segment))
-            check_neighbors(index - 1)
-            check_neighbors(index)
+            active.append(event.segment)
+            for other_segment in active:
+                if other_segment != event.segment:
+                    point = event.segment.intersect(other_segment)
+                    if point:
+                        intersections.append(point)
         else:
-            index = bisect.bisect_left(status, (event.segment.intersect_vertical(x), event.segment))
-            check_neighbors(index - 1)
-            check_neighbors(index + 1)
-            remove(event.segment, x)
-
+            active.remove(event.segment)
     return intersections
 
 

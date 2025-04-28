@@ -354,12 +354,12 @@ second.intersect(first)
 #     pts = np.array([[cell.point.x, cell.point.y] for cell in diagram.cells])
 #     ax.scatter(pts[:,0], pts[:,1], color='blue', zorder=5)
 #     for cell in diagram.cells:
-#         poly = [[point.x, point.y] for point in cell.polygon.points]
+#         poly = [[point.x, point.y] for point in cell.polygon.cells]
 #         if len(poly) > 0:
 #             poly = np.array(poly)
 #             ax.plot(np.append(poly[:,0], poly[0,0]), np.append(poly[:,1], poly[0,1]), 'k-', lw=1)
 #             ax.fill(poly[:,0], poly[:,1], alpha=0.2)
-#     edges = np.array([[point.x, point.y] for point in edges.points])
+#     edges = np.array([[point.x, point.y] for point in edges.cells])
 #     ax.plot(np.append(edges[:,0], edges[0,0]), np.append(edges[:,1], edges[0,1]), 'r--', lw=1)
 #     ax.set_xlim(np.min(edges[:,0]), np.max(edges[:,0]))
 #     ax.set_ylim(np.min(edges[:,1]), np.max(edges[:,1]))
