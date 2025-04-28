@@ -1,16 +1,15 @@
 import matplotlib.pyplot as plt
 from shapes import Point, Polygon, Line, Segment, Vector
-from stack import Stack
 
 
 class VoronoiCell(object):
     def __init__(self, point, polygon):
         self.point = point
         self.polygon = polygon
-        self.neighbors = []
+        self.neighbors = set()
 
     def check_neighbors(self):
-        new_neighbors = []
+        new_neighbors = set()
         for neighbor in self.neighbors:
             add_neighbor = False
             for point in self.polygon.points:
@@ -18,7 +17,7 @@ class VoronoiCell(object):
                     add_neighbor = True
                     break
             if add_neighbor:
-                new_neighbors.append(neighbor)
+                new_neighbors.add(neighbor)
         self.neighbors = new_neighbors
 
     def draw(self, polygon_color="black", point_color="red", fill_color="white"):
@@ -49,6 +48,9 @@ class VoronoiDiagram(object):
                     min_segment = segment
         return min_segment
 
+    def get_relaxed(self):
+        return [cell.polygon.kernel for cell in self.cells]
+
 
 def build_voronoi_diagram(points, edges):
     sorted_points = sorted(points)
@@ -65,8 +67,8 @@ def voronoi_split(points, edges, left, right):
         mid_perpendicular = Segment(points[left], points[right - 1]).mid_perpendicular()
         left_ceil = VoronoiCell(points[left], edges.clip(mid_perpendicular))
         right_ceil = VoronoiCell(points[right - 1], edges.clip(mid_perpendicular.inverted()))
-        left_ceil.neighbors = [right_ceil]
-        right_ceil.neighbors = [left_ceil]
+        left_ceil.neighbors = {right_ceil}
+        right_ceil.neighbors = {left_ceil}
         return VoronoiDiagram([left_ceil, right_ceil])
 
     mid = (left + right) // 2
@@ -89,7 +91,7 @@ def voronoi_merge(left, right):
                     mid_perpendicular = mid_perpendicular.inverted()
                 if polygon.is_intersect_line(mid_perpendicular):
                     polygon = polygon.clip(mid_perpendicular)
-                    neighbors.append(other_cell)
+                    neighbors.add(other_cell)
             all_cells.append((cell, polygon, neighbors))
 
     cell_list = []
@@ -107,14 +109,13 @@ x_min, x_max, y_min, y_max = -range_x / 2, range_x / 2, -range_y / 2, range_y / 
 
 n = 10
 points = [Point.get_random(x_min, x_max, y_min, y_max) for _ in range(n)]
-multiplier = 1.5
-x_min, x_max, y_min, y_max = multiplier * x_min, multiplier * x_max, multiplier * y_min, multiplier * y_max
+multiplier = 100
 
 edges = Polygon([
-    Point(x_min, y_min),
-    Point(x_max, y_min),
-    Point(x_max, y_max),
-    Point(x_min, y_max),
+    Point(multiplier * x_min, multiplier * y_min),
+    Point(multiplier * x_max, multiplier * y_min),
+    Point(multiplier * x_max, multiplier * y_max),
+    Point(multiplier * x_min, multiplier * y_max),
 ])
 diagram = build_voronoi_diagram(points, edges)
 
@@ -125,6 +126,8 @@ closest = diagram.closest_pair()
 closest.draw("red")
 print(closest.to_str())
 print("Distance: ", closest.get_length())
-plt.xlim(x_min, x_max)
-plt.ylim(y_min, y_max)
+
+visual_multiplier = 1.5
+plt.xlim(visual_multiplier * x_min, visual_multiplier * x_max)
+plt.ylim(visual_multiplier * y_min, visual_multiplier * y_max)
 plt.show()

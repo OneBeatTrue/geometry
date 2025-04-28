@@ -17,6 +17,7 @@ points_to_check = [
     Point(6, 3),
     Point(8, 5),
     Point(1, 5),
+    Point(8, 1),
 ]
 
 polygon = Polygon(points)

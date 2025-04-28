@@ -6,6 +6,7 @@ from shapes import Point, Segment
 
 segments = [
     Segment(Point(1,1), Point(2,5)),
+    Segment(Point(1,1), Point(2,5)),
     Segment(Point(2,7), Point(5, -1)),
     Segment(Point(3, 4), Point(0, 5)),
     Segment(Point(3, 1), Point(2, 6)),

@@ -18,46 +18,46 @@ from shapes import Point, Polygon
 # Point(1, 5),
 # ]
 
-# cells = [
-#     Point(1, 1),
-#     Point(2, 2),
-#     Point(4, 0),
-#     Point(4, 1),
-#     Point(5, 1),
-#     Point(6, 0),
-#     Point(6, 4),
-#     Point(4, 6),
-#     # Point(3.7, 4),
-#     # Point(3.5, 4),
-#     # Point(3, 4),
-#     # Point(5, 4),
-#     Point(2, 4),
-#     Point(0, 6),
-# ]
-#
-#
-# points_to_check = [
-#     Point(1.5, 4),
-#     Point(3.5, 5),
-#     Point(4, 1),
-# ]
-
 points = [
     Point(1, 1),
     Point(2, 2),
     Point(4, 0),
+    Point(4, 1),
+    Point(5, 1),
+    Point(6, 0),
     Point(6, 4),
     Point(4, 6),
+    # Point(3.7, 4),
+    # Point(3.5, 4),
+    # Point(3, 4),
+    # Point(5, 4),
     Point(2, 4),
     Point(0, 6),
 ]
 
 
 points_to_check = [
-    Point(1.5, 4.2),
+    Point(1.5, 4),
     Point(3.5, 5),
-    Point(4.5, 1),
+    Point(4, 1),
 ]
+
+# points = [
+#     Point(1, 1),
+#     Point(2, 2),
+#     Point(4, 0),
+#     Point(6, 4),
+#     Point(4, 6),
+#     Point(2, 4),
+#     Point(0, 6),
+# ]
+#
+#
+# points_to_check = [
+#     Point(1.5, 4.2),
+#     Point(3.5, 5),
+#     Point(4.5, 1),
+# ]
 
 polygon = Polygon(points)
 polygon.draw()
